@@ -1,47 +1,31 @@
+
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="angry.css"/>
   </head>
   <body>
 
     <div class="background">
         <main>
 
-            <h2>Angry Dice</h2>
+            <h2>getgames</h2>
+    ​      <form id="login" method="post">
+              <label for="name">name</label>
+              <input type="text" name="name" placeholder="name" required/>
+              <!-- <label for="password">password</label>
+              <input type="text" name="password" placeholder="password" required/> -->
+              <input type="submit" name="submit" id="submit" value="submit" />
+          </form>
 
-    ​
 
-            <table width="100%">
-
-                <thead>
-
-                    <tr>
-                      <td><button id="dice1keep">Roll Die 1</button></td>
-
-                          <td><button id="dice2keep">Roll Die 2</button></td>
-                    </tr>
-
-                </thead>
-
-                <tbody id="Dice">
-
-                </tbody>
-    <tfoot>
-      <tr>
-
-      </tr>
-    </tfoot>
-            </table>
-
-            <button id="play">Roll Both Dice</button>
-            <button id="reset">Reset</button>
 </div>
         </main>
     ​
-    <script src="angry.js"></script>
 
   </body>
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+<script src="{% static 'checkers_app/getgames.js' %}">
 </html>

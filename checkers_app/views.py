@@ -3,4 +3,10 @@ from django.shortcuts import render
 
 # Create your views here.
 def main(request):
-    return render(request, 'getgames.html', data)
+    data = {}
+    return render(request, 'checkers_app/getgames.html', data)
+
+def accept(request):
+    if request.POST:
+        num = request.POST
+        print(num)

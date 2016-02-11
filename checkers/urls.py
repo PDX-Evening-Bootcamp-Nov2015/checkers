@@ -17,6 +17,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+import checkers_app.views
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^getgames/$', checkers_app.views.main),
+    url(r'^getgames/request$', checkers_app.views.accept),
 ]
