@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^check_login/$', checkers_app.views.check_login),
     url(r'^register/$', checkers_app.views.register),
     url(r'^getgames/$', checkers_app.views.getgames),
+    url(r'^check_registration/$', checkers_app.views.check_registration),
 ]
