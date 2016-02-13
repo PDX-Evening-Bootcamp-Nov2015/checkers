@@ -51,35 +51,33 @@ def check_registration(request):
             return HttpResponseRedirect("/home/")
         print("username already created")
 
-def new_game(request):
-    if request.POST:
-        black_player_name = request.POST['username']
+def new_game():
+    # if request.POST:
+    #     black_player_name = request.POST['username']
+        black_player_name = "Evan"
         newgame = Game.objects.create(
-        # open_session default value
-        # open_session = models.BooleanField(default=False)
-        black_player = User.objects.get(username__iexact=black_player_name)
-        # red_player = models.ForeignKey(User)
-        # which_player = models.PositiveSmallIntegerField(default=0)
-        # jumped = models.BooleanField(default=False)
-        # turn_over = models.BooleanField(default=False)
+            black_player = User.objects.get(username__iexact=black_player_name)
         )
-        # newgamespace = Space.objects.create(
+        #use these filters to find objects after they have been created
+        # red_pieces_list = Piece.objects.filter(color="Red", )
+        # black_pieces_list = Piece.objects.filter(color="Black")
+
         for x in range(8):
             for y in range(8):
                 s = Space.objects.create(
-                x_coordinate = x,
-                y_coordinate = y,
-                game_id = newgame
+                    x_coordinate = x,
+                    y_coordinate = y,
+                    game_id = newgame,
                 )
-        # piece_id = models.ForeignKey(Piece, null=True)
+
+#
         for x in range(24):
             if x < 12:
-                new_red_pieces = Piece.objects.create(
-                # king_status = models.BooleanField(default=False)
-                color = "Red"
-                )
-            elif x > 12:
-                new_black_pieces = Piece.objects.create(
-                # king_status = models.BooleanField(default=False)
-                color = "Black"
-                )
+                new_red_piece = Piece.objects.create(color="Red")
+            elif x >= 12:
+                new_black_piece = Piece.objects.create(color="Black")
+
+
+        spaces = Space.objects.order_by("x_coordinate", "y_coordinate")
+
+        print(spaces)
