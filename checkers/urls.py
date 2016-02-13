@@ -21,6 +21,10 @@ import checkers_app.views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^getgames/$', checkers_app.views.main),
-    url(r'^getgames/request$', checkers_app.views.accept),
+#initial page presents user with the ability to login with existing username or create a new one
+    url(r'^home/$', checkers_app.views.main),
+    url(r'^check_login/$', checkers_app.views.check_login),
+    url(r'^register/$', checkers_app.views.register),
+    url(r'^getgames/$', checkers_app.views.getgames),
+    url(r'^check_registration/$', checkers_app.views.check_registration),
 ]
