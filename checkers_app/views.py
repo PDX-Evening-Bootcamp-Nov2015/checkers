@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .models import Game, Space, Piece
 #@login_required
 
 
@@ -50,6 +51,38 @@ def check_registration(request):
             return HttpResponseRedirect("/home/")
         print("username already created")
 
+def new_game(request):
+    if request.POST:
+        black_player_name = request.POST['username']
+        newgame = Game.objects.create(
+        # open_session default value
+        # open_session = models.BooleanField(default=False)
+        black_player = User.objects.get(username__iexact=black_player_name)
+        # red_player = models.ForeignKey(User)
+        # which_player = models.PositiveSmallIntegerField(default=0)
+        # jumped = models.BooleanField(default=False)
+        # turn_over = models.BooleanField(default=False)
+        )
+        # newgamespace = Space.objects.create(
+        for x in range(8):
+            for y in range(8):
+                s = Space.objects.create(
+                x_coordinate = x,
+                y_coordinate = y,
+                game_id = newgame
+                )
+        # piece_id = models.ForeignKey(Piece, null=True)
+        for x in range(24):
+            if x < 12:
+                new_red_pieces = Piece.objects.create(
+                # king_status = models.BooleanField(default=False)
+                color = "Red"
+                )
+            elif x > 12:
+                new_black_pieces = Piece.objects.create(
+                # king_status = models.BooleanField(default=False)
+                color = "Black"
+                )
 
 ### Helper functions here:
 
