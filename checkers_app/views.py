@@ -111,3 +111,5 @@ def gen_move_coords(coords):
         xn, yn = x + xm, y + ym
         if xn in range(8) and yn in range(8):
             new_coords = (x + xm, y + ym)
+            valid_moves.append(new_coords)
+    return valid_moves
