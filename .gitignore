@@ -65,3 +65,6 @@ target/
 
 #files that holds secret key for checkers django app
 secret.py
+
+#database
+db.sqlite3
