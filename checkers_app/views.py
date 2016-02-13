@@ -87,4 +87,27 @@ def new_game(request):
 ### Helper functions here:
 
 def is_king(piece_id):
-    pass
+    '''
+    checks if a corresponding peice ID is kinged
+    for use in move validation views
+    '''
+    return Piece.objects.get(pk=piece_id).king_status
+
+def gen_move_coords(coords):
+    '''
+    generates a list of up to four valid moves (not jumps)
+    based on a set of coordinates
+    '''
+    # coords as tuple (x, y)
+    valid_moves = []
+    x, y = coords[0], coords[1]
+    # modifiers below define the relation to four possible valid moves
+    modifiers = [(-1, 1), (1, -1), (-1, -1), (1, 1)]
+    # apply each modifier to original coordinates
+    for mod in modifiers:
+        # cache modifiers for this loop
+        xm, ym = mod[0], mod[1]
+        # set and check each new coord
+        xn, yn = x + xm, y + ym
+        if xn in range(8) and yn in range(8):
+            new_coords = (x + xm, y + ym)
