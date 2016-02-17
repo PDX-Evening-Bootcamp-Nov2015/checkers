@@ -12,6 +12,10 @@ def main(request):
     data = {}
     return render(request, 'checkers_app/home.html', data)
 
+def game(request):
+    context = {}
+    return render(request, 'checkers_app/game.html', context)
+
 def check_login(request):
     if request.POST:
         username = request.POST['username']
@@ -69,7 +73,7 @@ def new_game():
                     y_coordinate = y,
                     game_id = newgame,
                 )
-                
+
         for x in range(24):
             if x < 12:
                 new_red_piece = Piece.objects.create(color="Red")

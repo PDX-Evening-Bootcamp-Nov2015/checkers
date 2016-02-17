@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'^check_registration/$', checkers_app.views.check_registration),
     url(r'^$', checkers_app.views.main),
     url(r'^board/$', checkers_app.views.board),
+    url(r'^game/$', checkers_app.views.game),
 ]

@@ -1,17 +1,21 @@
+{% extends "checkers_app/checkersBoard.html" %}
 {% load staticfiles %}
+{% block above_board %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href='{% static "checkers_app/CSS/game.css" %}' media="screen" title="no title" charset="utf-8">
     <title>Checkers Game</title>
   </head>
   <body>
     <header>
       <h1>Checkers</h1>
     </header>
-    <div class="board">
+      {% endblock %} <!-- end above_board block -->
+      {# board goes here #}
+      {% block below_board %}
 
-    </div>
     <div class="player_name">
 
     </div>
@@ -24,3 +28,4 @@
 </script>
   </body>
 </html>
+{% endblock %} <!-- end below_board block -->

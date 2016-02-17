@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-{% load static %}
-<html>
-  <head>
-    <link rel='stylesheet' href="{% static 'checkers_app/CSS/board.css' %}" type='text/css' />
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+{% load staticfiles %}
+{% block above_board %}
 
+{% endblock %}
 <div id="board">
   <div class="row">
     <div id="07" class= "icon"> <img src="{% static 'checkers_app/images/white.square.gif' %}" alt="" /> </div>
@@ -89,17 +83,7 @@
     <div id="60" class= "icon"> <img src="{% static 'checkers_app/images/Red Square.png' %}" alt="" /> </div>
     <div id="70" class= "icon"> <img src="{% static 'checkers_app/images/white.square.gif' %}" alt="" /> </div>
   </div>
-
 </div>
+{% block below_board %}
 
-
-
-
-
-
-
-
-
-
-  </body>
-</html>
+{% endblock %}
