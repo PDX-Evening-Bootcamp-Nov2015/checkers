@@ -81,3 +81,8 @@ def new_game():
         spaces = Space.objects.order_by("x_coordinate", "y_coordinate")
 
         print(spaces)
+
+def board(request):
+    data = {}
+    print('im being called')
+    return render(request, 'checkers_app/checkersBoard.html', data)
