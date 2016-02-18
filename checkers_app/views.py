@@ -1,11 +1,11 @@
+from datetime import datetime
+from random import random, randint
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Game, Space, Piece
-#@login_required
-
 
 # Create your views here.
 def main(request):
@@ -51,33 +51,62 @@ def check_registration(request):
             return HttpResponseRedirect("/home/")
         print("username already created")
 
-def new_game():
+def new_game(request):
     # if request.POST:
     #     black_player_name = request.POST['username']
-        black_player_name = "Evan"
+        black_player_name = "Evan3"
         newgame = Game.objects.create(
-            black_player = User.objects.get(username__iexact=black_player_name)
+            black_player = User.objects.get(username__iexact=black_player_name),
+            gamenumber = randint(1,10000)
         )
+
+        test = newgame.gamenumber
         #use these filters to find objects after they have been created
         # red_pieces_list = Piece.objects.filter(color="Red", )
         # black_pieces_list = Piece.objects.filter(color="Black")
 
         for x in range(8):
             for y in range(8):
-                s = Space.objects.create(
+                newspace = Space.objects.create(
                     x_coordinate = x,
                     y_coordinate = y,
                     game_id = newgame,
                 )
 
-#
-        for x in range(24):
-            if x < 12:
-                new_red_piece = Piece.objects.create(color="Red")
-            elif x >= 12:
-                new_black_piece = Piece.objects.create(color="Black")
+        for x in Space.objects.filter(y_coordinate=0):
+            if x.x_coordinate %2 == 0:
+                x.piece_id = Piece.objects.create(color="Red", game_id=newgame)
+
+        for x in Space.objects.filter(y_coordinate=2):
+            if x.x_coordinate %2 == 0:
+                x.piece_id = Piece.objects.create(color="Red", game_id=newgame)
+
+        for x in Space.objects.filter(y_coordinate=1):
+            if x.x_coordinate %2 != 0:
+                x.piece_id = Piece.objects.create(color="Red", game_id=newgame)
+
+        for x in Space.objects.filter(y_coordinate=5):
+            if x.x_coordinate %2 != 0:
+                x.piece_id = Piece.objects.create(color="Black", game_id=newgame)
+
+        for x in Space.objects.filter(y_coordinate=6):
+            if x.x_coordinate %2 == 0:
+                x.piece_id = Piece.objects.create(color="Black", game_id=newgame)
+
+        for x in Space.objects.filter(y_coordinate=7):
+            if x.x_coordinate %2 != 0:
+                x.piece_id = Piece.objects.create(color="Black", game_id=newgame)
+
+        return HttpResponseRedirect("/game/", test)
+
+def game(request):
+    if request.get != True:
+        print("yes")
+        a = request.get
+        print(a)
+    return render(request, 'checkers_app/game.html')
 
 
-        spaces = Space.objects.order_by("x_coordinate", "y_coordinate")
 
-        print(spaces)
+
+        # spaces = Space.objects.order_by("x_coordinate", "y_coordinate")

@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
+from random import randint
 
 class Game(models.Model):
     open_session = models.BooleanField(default=False)
@@ -8,6 +10,7 @@ class Game(models.Model):
     which_player = models.PositiveSmallIntegerField(default=0)
     jumped = models.BooleanField(default=False)
     turn_over = models.BooleanField(default=False)
+    gamenumber = models.PositiveSmallIntegerField(default=0)
 
 
 class Piece(models.Model):
@@ -25,4 +28,4 @@ class Space(models.Model):
     game_id = models.ForeignKey(Game, null=True)
 
     def __str__(self):
-        return ("x coorindate = " + str(self.x_coordinate) + " y coorindate =" + str(self.y_coordinate) + str(self.piece_id))
+        return ("x coordindate = " + str(self.x_coordinate) + " y coordinate =" + str(self.y_coordinate))
