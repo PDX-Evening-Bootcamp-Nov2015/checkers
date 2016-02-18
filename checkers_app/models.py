@@ -10,7 +10,7 @@ class Game(models.Model):
     which_player = models.PositiveSmallIntegerField(default=0)
     jumped = models.BooleanField(default=False)
     turn_over = models.BooleanField(default=False)
-    gamenumber = models.PositiveSmallIntegerField(default=0)
+    # gamenumber = models.PositiveSmallIntegerField(default=0)
 
 
 class Piece(models.Model):

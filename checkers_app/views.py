@@ -1,7 +1,7 @@
 from datetime import datetime
 from random import random, randint
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -57,10 +57,7 @@ def new_game(request):
         black_player_name = "Evan3"
         newgame = Game.objects.create(
             black_player = User.objects.get(username__iexact=black_player_name),
-            gamenumber = randint(1,10000)
         )
-
-        test = newgame.gamenumber
         #use these filters to find objects after they have been created
         # red_pieces_list = Piece.objects.filter(color="Red", )
         # black_pieces_list = Piece.objects.filter(color="Black")
@@ -97,18 +94,20 @@ def new_game(request):
             if x.x_coordinate %2 != 0:
                 x.piece_id = Piece.objects.create(color="Black", game_id=newgame)
 
-        return HttpResponseRedirect("/game/", test)
+        return HttpResponseRedirect("/game/" + str(newgame.id))
 
-def game(request):
-    if request.get != True:
-        print("yes")
-        a = request.get
-        print(a)
-    return render(request, 'checkers_app/game.html')
+def game(request, game_number):
+    current_game = Game.objects.get(id=game_number)
+    print(current_game)
+    return render(request, 'checkers_app/checkersBoard.html')
 
         # spaces = Space.objects.order_by("x_coordinate", "y_coordinate")
 
-def board(request):
-    data = {}
-    print('im being called')
-    return render(request, 'checkers_app/checkersBoard.html', data)
+def board_click_square(request, variable_square):
+    x = variable_square[0]
+    y = variable_square[1]
+    return JsonResponse({"square":variable_square})
+
+def get_positions(request):
+    temp = Space.objects.filter(y_coordinate=0).filter(y_coordinate=0).id
+    return JsonResponse({"test":str(temp)})
