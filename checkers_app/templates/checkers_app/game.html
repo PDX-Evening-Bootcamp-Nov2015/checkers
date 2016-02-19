@@ -1,31 +1,36 @@
-{% extends "checkers_app/checkersBoard.html" %}
 {% load staticfiles %}
-{% block above_board %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href='{% static "checkers_app/CSS/game.css" %}' media="screen" title="no title" charset="utf-8">
-    <title>Checkers Game</title>
+    <title></title>
   </head>
   <body>
-    <header>
-      <h1>Checkers</h1>
-    </header>
-      {% endblock %} <!-- end above_board block -->
-      {# board goes here #}
-      {% block below_board %}
 
-    <div class="player_name">
+    <div class="background">
+        <main>
 
-    </div>
-    <div class="player_turn">
+<!-- <h2>Yay this is where you get games!</h2>
+          <form action="/new_game/" method="POST">
+            {% csrf_token %}
+            <button id="newgame"> newgame</button>
+           <!-- First name: <input type="text" name="fname"><br>
+           Last name: <input type="text" name="lname"><br>
+           <button type="submit">Submit</button><br>
+           <button type="submit" formaction="demo_admin.asp">Submit as admin</button> -->
+         </form>
 
-    </div>
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src='{% static "checkers_app/game.js" %}'>
 
-</script>
+            <!-- <button id="newgame"> newgame</button>
+            <button id="joinexistinggame"> join existing game</button> -->
+ -->
+
+</main>
+</div>
+
+    ​
+
   </body>
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+<script src="{% static 'checkers_app/game.js' %}">
 </html>
-{% endblock %} <!-- end below_board block -->

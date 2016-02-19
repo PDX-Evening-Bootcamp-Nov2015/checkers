@@ -27,7 +27,8 @@ urlpatterns = [
     url(r'^register/$', checkers_app.views.register),
     url(r'^getgames/$', checkers_app.views.getgames),
     url(r'^check_registration/$', checkers_app.views.check_registration),
-    url(r'^$', checkers_app.views.main),
-    url(r'^board/$', checkers_app.views.board),
-    url(r'^game/$', checkers_app.views.game),
+    url(r'^new_game/$', checkers_app.views.new_game),
+    url(r'^game/(?P<game_number>[0-9]+)$', checkers_app.views.game),
+    url(r'^board/(?P<variable_square>[0-7]{2})$', checkers_app.views.board_click_square),
+    url(r'^get_positions/(?P<game_number2>[0-9]+)$', checkers_app.views.get_positions),
 ]
