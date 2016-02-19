@@ -73,26 +73,32 @@ def new_game(request):
         for x in Space.objects.filter(y_coordinate=0):
             if x.x_coordinate %2 == 0:
                 x.piece_id = Piece.objects.create(color="Red", game_id=newgame)
+                x.save()
 
         for x in Space.objects.filter(y_coordinate=2):
             if x.x_coordinate %2 == 0:
                 x.piece_id = Piece.objects.create(color="Red", game_id=newgame)
+                x.save()
 
         for x in Space.objects.filter(y_coordinate=1):
             if x.x_coordinate %2 != 0:
                 x.piece_id = Piece.objects.create(color="Red", game_id=newgame)
+                x.save()
 
         for x in Space.objects.filter(y_coordinate=5):
             if x.x_coordinate %2 != 0:
                 x.piece_id = Piece.objects.create(color="Black", game_id=newgame)
+                x.save()
 
         for x in Space.objects.filter(y_coordinate=6):
             if x.x_coordinate %2 == 0:
                 x.piece_id = Piece.objects.create(color="Black", game_id=newgame)
+                x.save()
 
         for x in Space.objects.filter(y_coordinate=7):
             if x.x_coordinate %2 != 0:
                 x.piece_id = Piece.objects.create(color="Black", game_id=newgame)
+                x.save()
 
         return HttpResponseRedirect("/game/" + str(newgame.id))
 
@@ -111,15 +117,16 @@ def get_positions(request, game_number2):
     master_list = []
     temp_list = []
     coordinate_dictionary = {}
-    current_game2 = game_number2
     for x in Space.objects.all():
         if str(x.game_id.id) == game_number2:
-            temp_list.append(x)
-    for xx in temp_list:
-        print(x.piece_id.id)        
-            # temp_list = []
-            # temp_list.append(x.x_coordinate)
-            # temp_list.append(x.y_coordinate)
-            # master_list.append(temp_list)
+            print(x.piece_id)
 
-    return JsonResponse({"key":"yes"})
+    #         temp_list.append(x)
+    # for xx in temp_list:
+    #     print(x.piece_id.id)
+                # temp_list = []
+                # temp_list.append(x.x_coordinate)
+                # temp_list.append(x.y_coordinate)
+                # master_list.append(temp_list)
+
+    return JsonResponse({"key":master_list})
