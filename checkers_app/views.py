@@ -84,5 +84,4 @@ def new_game():
 
 def board(request):
     data = {}
-    print('im being called')
     return render(request, 'checkers_app/checkersBoard.html', data)
