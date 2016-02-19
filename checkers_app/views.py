@@ -119,14 +119,11 @@ def get_positions(request, game_number2):
     coordinate_dictionary = {}
     for x in Space.objects.all():
         if str(x.game_id.id) == game_number2:
-            print(x.piece_id)
-
-    #         temp_list.append(x)
-    # for xx in temp_list:
-    #     print(x.piece_id.id)
-                # temp_list = []
-                # temp_list.append(x.x_coordinate)
-                # temp_list.append(x.y_coordinate)
-                # master_list.append(temp_list)
+            if str(x.piece_id) == "Red" or str(x.piece_id) == "Black":
+                temp_list = []
+                temp_list.append(x.x_coordinate)
+                temp_list.append(x.y_coordinate)
+                temp_list.append(str(x.piece_id))
+                master_list.append(temp_list)
 
     return JsonResponse({"key":master_list})
