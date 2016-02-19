@@ -135,7 +135,6 @@ def get_positions(request, game_number2):
 
 def board(request):
     data = {}
-    print('im being called')
     return render(request, 'checkers_app/checkersBoard.html', data)
 
 ### Helper functions here:
