@@ -98,7 +98,6 @@ def new_game(request):
 
 def game(request, game_number):
     current_game = Game.objects.get(id=game_number)
-    print(current_game)
     return render(request, 'checkers_app/checkersBoard.html')
 
         # spaces = Space.objects.order_by("x_coordinate", "y_coordinate")
@@ -108,6 +107,19 @@ def board_click_square(request, variable_square):
     y = variable_square[1]
     return JsonResponse({"square":variable_square})
 
-def get_positions(request):
-    temp = Space.objects.filter(y_coordinate=0).filter(y_coordinate=0).id
-    return JsonResponse({"test":str(temp)})
+def get_positions(request, game_number2):
+    master_list = []
+    temp_list = []
+    coordinate_dictionary = {}
+    current_game2 = game_number2
+    for x in Space.objects.all():
+        if str(x.game_id.id) == game_number2:
+            temp_list.append(x)
+    for xx in temp_list:
+        print(x.piece_id.id)        
+            # temp_list = []
+            # temp_list.append(x.x_coordinate)
+            # temp_list.append(x.y_coordinate)
+            # master_list.append(temp_list)
+
+    return JsonResponse({"key":"yes"})

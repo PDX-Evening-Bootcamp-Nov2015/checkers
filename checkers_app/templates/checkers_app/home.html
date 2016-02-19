@@ -2,29 +2,57 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Checkers Home Page</title>
   </head>
+
+  <header class="w3-container w3-teal">
+  <h1>Checkers</h1>
+</header>
   <body>
+<main>
 
-    <div class="background">
-        <main>
-
-            <h2>homepage - login</h2>
-    ​      <form id="login" method="POST" action="/check_login/">
+<div>
+    <!-- ​      <form id="login" method="POST" action="/check_login/">
               {% csrf_token %}
               <label for="username">username</label>
               <input type="text" name="username" placeholder="username" required/>
               <label for="password">password</label>
               <input type="password" name="password" placeholder="password" required/>
               <input type="submit" name="submit" id="submit" value="submit" />
-          </form>
+          </form> -->
 
-
+      <form class="w3-container w3-card-4" id="login" method="POST" action="/check_login/">
+      {% csrf_token %}
+      <h2 class="w3-text-black">Login</h2>
+      <p>
+      <label class="w3-text-black"><b>Username</b></label>
+      <input class="w3-input w3-border" name='username' type="text"></p>
+      <p>
+      <label class="w3-text-black"><b>Password</b></label>
+      <input class="w3-input w3-border" name='password' type="text"></p>
+      <p>
+      <button class="w3-btn w3-black" name="submit" id="submit">Login</button></p>
+      </form>
 </div>
+
+<article class="w3-container">
+
+<p>This Checkers application is built on a Django back-end with Javascript, HTML, and the W3.CSS framework providing the amazing visuals on the front-end.</p>
+
+<p>Additionally, this application runs on a SQLite server but will soon be transitioned to PostgreSQL</p>
+
+<p>Once you login or register you have the option to create a new game or join an existing game. You can play with other users throughout the world on any device.</p>
+
+</article>
         </main>
-    ​
+        <footer class="w3-container w3-teal">
+
+         <p>A CCJ Production...</p>
+       </footer>     ​
 
   </body>
   <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
