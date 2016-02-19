@@ -201,3 +201,7 @@ def check_jump_valid(start_coords, end_coords):
     intervene_x = (start_coords[0] + end_coords[0]) / 2
     intervene_y = (start_coords[1] + end_coords[1]) / 2
     intervening = (intervene_x, intervene_y)
+    if check_space(intervening):
+        return True
+    else:
+        return False
