@@ -7,15 +7,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Game, Space, Piece
 
-#### Create your views here.
+#main function renders the home url
 def main(request):
     data = {}
     return render(request, 'checkers_app/home.html', data)
 
-def game(request):
-    context = {}
-    return render(request, 'checkers_app/game.html', context)
-
+#check_login function takes in a user's username and password and takes the user
+#to the register page if their credentials are not valid. if the credentials
+#are valid the user is redeirected to the get games page.
 def check_login(request):
     if request.POST:
         username = request.POST['username']
@@ -32,15 +31,20 @@ def check_login(request):
         else:
             return HttpResponseRedirect("/register/")
 
+#register renders the registration page
 def register(request):
     data = {}
     return render(request, 'checkers_app/register.html', data)
 
+#if the user is logged in, the getgames function renders the get games page.
+#the get games page allows the user to join an existing game or create a new one
 @login_required(login_url='/home/')
 def getgames(request):
     data = {}
     return render(request, 'checkers_app/getgames.html', data)
 
+#the check_registration function allows a new user to register. Once the user
+#is registered they are redirected to the home page
 def check_registration(request):
     if request.POST:
         usernamecheck = request.POST['username']
@@ -55,6 +59,7 @@ def check_registration(request):
             return HttpResponseRedirect("/home/")
         print("username already created")
 
+#new_game creates a new game object and associated piece and space objects
 def new_game(request):
     # if request.POST:
     #     black_player_name = request.POST['username']
@@ -107,17 +112,23 @@ def new_game(request):
 
         return HttpResponseRedirect("/game/" + str(newgame.id))
 
+#the game function takes in the game.id from either a new game or an existing game
+#and renders the checkersBoard.html page
 def game(request, game_number):
     current_game = Game.objects.get(id=game_number)
     return render(request, 'checkers_app/checkersBoard.html')
 
-        # spaces = Space.objects.order_by("x_coordinate", "y_coordinate")
+# spaces = Space.objects.order_by("x_coordinate", "y_coordinate")
 
+#currently does nothing
 def board_click_square(request, variable_square):
     x = variable_square[0]
     y = variable_square[1]
     return JsonResponse({"square":variable_square})
 
+#get_positions receives an ajax call from javascript and returns an array inside
+#of a dictionary containg the following
+# [xcoordinate, ycoordinate, color of piece, and combined coordinates for the piece]
 def get_positions(request, game_number2):
     master_list = []
     temp_list = []
@@ -126,16 +137,14 @@ def get_positions(request, game_number2):
         if str(x.game_id.id) == game_number2:
             if str(x.piece_id) == "Red" or str(x.piece_id) == "Black":
                 temp_list = []
+                combined_coordinates = str(x.x_coordinate) + str(x.y_coordinate)
                 temp_list.append(x.x_coordinate)
                 temp_list.append(x.y_coordinate)
                 temp_list.append(str(x.piece_id))
+                temp_list.append(combined_coordinates)
                 master_list.append(temp_list)
 
     return JsonResponse({"key":master_list})
-
-def board(request):
-    data = {}
-    return render(request, 'checkers_app/checkersBoard.html', data)
 
 ### Helper functions here:
 
